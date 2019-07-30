@@ -3,13 +3,13 @@
 #### Create the VMs
 ##################################
 resource "vsphere_virtual_machine" "node" {
-  folder     = "${local.folder_path}"
+  folder     = "${var.folder}"
 
   #####
   # VM Specifications
   ####
   count            = "${var.nodes["count"]}"
-  resource_pool_id = "${data.vsphere_resource_pool.pool.id}"
+  resource_pool_id = "${var.vsphere_resource_pool_id}"
 
   name      = "${format("${lower(var.instance_name)}%02d", count.index + 1) }"
   num_cpus  = "${var.nodes["vcpu"]}"
@@ -21,7 +21,7 @@ resource "vsphere_virtual_machine" "node" {
   ####
   # Disk specifications
   ####
-  datastore_id  = "${data.vsphere_datastore.datastore.id}"
+  datastore_id  = "${var.datastore_id}"
   guest_id      = "${data.vsphere_virtual_machine.template.guest_id}"
   scsi_type     = "${data.vsphere_virtual_machine.template.scsi_type}"
 
@@ -46,7 +46,7 @@ resource "vsphere_virtual_machine" "node" {
   # Network specifications
   ####
   network_interface {
-    network_id   = "${data.vsphere_network.network.id}"
+    network_id   = "${var.network_id}"
     adapter_type = "${data.vsphere_virtual_machine.template.network_interface_types[0]}"
   }
 

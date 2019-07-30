@@ -17,40 +17,40 @@ variable "allow_unverified_ssl" {
 ##### vSphere deployment specifications ######
 ##############################################
 
-variable "vsphere_datacenter" {
-  description = "Name of the vsphere datacenter to deploy to"
+variable "vsphere_datacenter_id" {
+  description = "ID of the vsphere datacenter to deploy to"
   default     = "___INSERT_YOUR_OWN____"
 }
 
-variable "vsphere_cluster" {
-  description = "Name of vsphere cluster to deploy to"
+variable "vsphere_cluster_id" {
+  description = "ID of vsphere cluster to deploy to"
   default     = "___INSERT_YOUR_OWN____"
 }
 
-variable "vsphere_resource_pool" {
-  description = "Path of resource pool to deploy to. i.e. /path/to/pool"
-  default     = "/"
+variable "vsphere_resource_pool_id" {
+  description = "ID resource pool to deploy to."
+  default     = ""
 }
 
-variable "network_label" {
-  description = "Name or label of network to provision VMs on. All VMs will be provisioned on the same network"
+variable "network_id" {
+  description = "ID of network to provision VMs on. All VMs will be provisioned on the same network"
   default     = "___INSERT_YOUR_OWN____"
 }
 
-variable "datastore" {
-  description = "Name of datastore to use for the VMs"
+variable "datastore_id" {
+  description = "ID of datastore to use for the VMs"
   default     = ""
 }
 
 ## Note
 # Because of https://github.com/terraform-providers/terraform-provider-vsphere/issues/271 templates must be converted to VMs on ESX 5.5 (and possibly other)
 variable "template" {
-  description = "Name of template or VM to clone for the VM creations. Tested on Ubuntu 16.04 LTS"
+  description = "ID of template or VM to clone for the VM creations. "
   default     = "___INSERT_YOUR_OWN____"
 }
 
 variable "folder" {
-  description = "Name of VM Folder to provision the new VMs in. The folder will be created"
+  description = "Name of VM Folder to provision the new VMs in. The folder must exist"
   default     = ""
 }
 
